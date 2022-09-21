@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Car rent project",
+    "description": "My car rent API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Booking cars",
+      "description": "API for booking cars and getting booking info in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/cars/available": {
+      "get": {
+        "summary": "Find if a car is available",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "car_id",
+            "required": "true",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/cars/book": {
+      "post": {
+        "summary": "Book a car",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "car_id",
+            "required": "true",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/cars/report": {
+      "get": {
+        "summary": "Get car report for availability",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "car_id",
+            "required": "true",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/cars/estimate-rent": {
+      "get": {
+        "summary": "Estimate rent",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": "true",
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

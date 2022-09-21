@@ -64,13 +64,16 @@ const getCarBookReport = async (req, res) => {
     var daysInMonthDb = 31
     let client = new Client(process.env.DB_URI)
     await client.connect()
-    const result = await client.query('select * from book_history where from_date > $1 and from_date < $2 and car_id = $3', [from, to, carId])
+    const result = await client.query('select * from book_history where from_date >= $1 and from_date <= $2 and car_id = $3', [from, to, carId])
+    console.log(result.rows)
     result.rows.forEach(element => {
       const db_to_date = new Date(element.to_date)
+      db_to_date.setHours(db_to_date.getHours() + 6)
       const db_from_date = new Date(element.from_date)
+      db_from_date.setHours(db_from_date.getHours() + 6)
       daysInMonthDb = daysInMonth(db_from_date.getFullYear(), db_from_date.getMonth())
       if (db_from_date.getMonth() != db_to_date.getMonth()) {
-        sumOfDaysBooked += daysInMonthDb - db_from_date.getDay()
+        sumOfDaysBooked += daysInMonth(db_from_date.getFullYear(), db_from_date.getMonth()) - db_from_date.getDay()
       } else {
         sumOfDaysBooked += getDays(db_from_date, db_to_date)
       }
