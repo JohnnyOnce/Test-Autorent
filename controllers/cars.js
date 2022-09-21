@@ -73,7 +73,7 @@ const getCarBookReport = async (req, res) => {
       db_from_date.setHours(db_from_date.getHours() + 6)
       daysInMonthDb = daysInMonth(db_from_date.getFullYear(), db_from_date.getMonth())
       if (db_from_date.getMonth() != db_to_date.getMonth()) {
-        sumOfDaysBooked += daysInMonth(db_from_date.getFullYear(), db_from_date.getMonth()) - db_from_date.getDay()
+        sumOfDaysBooked += daysInMonth(db_from_date.getFullYear(), db_from_date.getMonth()) - db_from_date.getDate()
       } else {
         sumOfDaysBooked += getDays(db_from_date, db_to_date)
       }
