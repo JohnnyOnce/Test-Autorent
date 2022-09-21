@@ -6,26 +6,26 @@
 1. Установить POSTGRESQL
 2. Создать базу данных test-autorent
 3. Создать таблицы cars и book_history с помощью скрипта
-CREATE TABLE IF NOT EXISTS public.cars--
-(--
-    id integer NOT NULL DEFAULT nextval('cars_id_seq'::regclass),--
-    brand character varying(50) COLLATE pg_catalog."default" NOT NULL,--
-    model character varying(50) COLLATE pg_catalog."default" NOT NULL,--
-    booked boolean NOT NULL DEFAULT false,--
-    CONSTRAINT cars_pkey PRIMARY KEY (id)--
-)--
-CREATE TABLE IF NOT EXISTS public.book_history--
-(--
-    id integer NOT NULL DEFAULT nextval('book_history_id_seq'::regclass),--
-    car_id integer NOT NULL DEFAULT nextval('book_history_car_id_seq'::regclass),--
-    from_date date NOT NULL,--
-    to_date date NOT NULL,--
-    CONSTRAINT book_history_pkey PRIMARY KEY (id),--
-    CONSTRAINT "car_id_FK" FOREIGN KEY (car_id)--
-        REFERENCES public.cars (id) MATCH SIMPLE--
-        ON UPDATE NO ACTION--
-        ON DELETE NO ACTION--
-)--
+CREATE TABLE IF NOT EXISTS public.cars
+(
+    id integer NOT NULL DEFAULT nextval('cars_id_seq'::regclass),
+    brand character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    model character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    booked boolean NOT NULL DEFAULT false,
+    CONSTRAINT cars_pkey PRIMARY KEY (id)
+)
+CREATE TABLE IF NOT EXISTS public.book_history
+(
+    id integer NOT NULL DEFAULT nextval('book_history_id_seq'::regclass),
+    car_id integer NOT NULL DEFAULT nextval('book_history_car_id_seq'::regclass),
+    from_date date NOT NULL,
+    to_date date NOT NULL,
+    CONSTRAINT book_history_pkey PRIMARY KEY (id),
+    CONSTRAINT "car_id_FK" FOREIGN KEY (car_id)
+        REFERENCES public.cars (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
 4. Запустить скрипт
 insert into cars(brand, model) values('Toyota', 'Camry')
 insert into cars(brand, model) values('Honda', 'Civic')
